@@ -1,31 +1,8 @@
-# Collections Plugins Directory
+# Plugins
 
-This directory can be used to ship various plugins inside an Ansible collection. Each plugin is placed in a folder that
-is named after the type of plugin it is in. It can also include the `module_utils` and `modules` directory that
-would contain module utils and modules respectively.
+В этом каталоге располагаются плагины коллекции `my_own_namespace.yandex_cloud_elk`.
 
-Here is an example directory of the majority of plugins currently supported by Ansible:
+## Модули
 
-```
-└── plugins
-    ├── action
-    ├── become
-    ├── cache
-    ├── callback
-    ├── cliconf
-    ├── connection
-    ├── filter
-    ├── httpapi
-    ├── inventory
-    ├── lookup
-    ├── module_utils
-    ├── modules
-    ├── netconf
-    ├── shell
-    ├── strategy
-    ├── terminal
-    ├── test
-    └── vars
-```
-
-A full list of plugin types can be found at [Working With Plugins](https://docs.ansible.com/ansible-core/devel/plugins/plugins.html).
+- **my_own_module** – создаёт текстовый файл с заданным содержимым.  
+  Подробная документация – в основном README коллекции.
