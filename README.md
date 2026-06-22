@@ -9,7 +9,7 @@
   * модуль `my_own_module` – создаёт файлы с проверкой идемпотентности и поддержкой `check_mode`  
   * роль `file_creator` – использует модуль с предустановленными параметрами  
 
-- **Playbook'и для тестирования** – лежат в `playbook/`  
+- **Playbook для тестирования** – лежат в `playbook/`  
   * `test_module.yml` – single-task вызов модуля  
   * `use_role.yml` – вызов роли `file_creator`  
   * `idempotency_test.yml` – проверка идемпотентности  
