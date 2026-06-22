@@ -1,0 +1,10 @@
+---
+- name: Use file_creator role from collection
+  hosts: localhost
+  connection: local
+  roles:
+    - role: my_own_namespace.yandex_cloud_elk.file_creator
+      vars:
+        file_path: "/tmp/from_role_collection.txt"
+        file_content: "Created by file_creator role in collection"
+        file_force: true

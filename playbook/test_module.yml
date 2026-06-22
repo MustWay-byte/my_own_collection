@@ -1,0 +1,10 @@
+---
+- name: Test my_own_module
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Create a file using my_own_module
+      my_org.my_collection.my_own_module:
+        path: /tmp/hello_from_playbook.txt
+        content: "Hello from Ansible playbook!"
+        force: true

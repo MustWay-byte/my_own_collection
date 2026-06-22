@@ -1,0 +1,9 @@
+---
+- name: Test idempotency of my_own_module
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Try to create file without force
+      my_org.my_collection.my_own_module:
+        path: /tmp/hello_from_playbook.txt
+        content: "Hello from Ansible playbook!"
