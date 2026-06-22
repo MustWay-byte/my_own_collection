@@ -1,10 +1,10 @@
 ---
-- name: Test my_own_module
+- name: Test my_own_module from installed collection
   hosts: localhost
   connection: local
   tasks:
     - name: Create a file using my_own_module
-      my_org.my_collection.my_own_module:
+      my_own_namespace.yandex_cloud_elk.my_own_module:
         path: /tmp/hello_from_playbook.txt
-        content: "Hello from Ansible playbook!"
+        content: "Hello from installed collection!"
         force: true
