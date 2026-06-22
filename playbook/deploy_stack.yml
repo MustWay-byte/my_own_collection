@@ -1,0 +1,72 @@
+---
+- name: Create infrastructure in Yandex Cloud
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tags: [infrastructure]
+  vars:
+    yc_folder_id: "b1g5m6nu8f7nl3dmsjot"
+    yc_zone: "ru-central1-a"
+    yc_subnet: "default-ru-central1-a"
+    yc_image_family: "ubuntu-2204-lts"
+    yc_image_folder_id: "standard-images"
+    yc_platform: "standard-v2"
+    yc_cores: 2
+    yc_memory: 2
+
+  tasks:
+    - name: Create ClickHouse VM
+      my_own_namespace.yandex_cloud_elk.yc_compute_instance:
+        name: "clickhouse-01"
+        folder_id: "{{ yc_folder_id }}"
+        zone: "{{ yc_zone }}"
+        cores: "{{ yc_cores }}"
+        memory: "{{ yc_memory }}"
+        image_family: "{{ yc_image_family }}"
+        image_folder_id: "{{ yc_image_folder_id }}"
+        subnet_name: "{{ yc_subnet }}"
+
+    - name: Create Vector VM
+      my_own_namespace.yandex_cloud_elk.yc_compute_instance:
+        name: "vector-01"
+        folder_id: "{{ yc_folder_id }}"
+        zone: "{{ yc_zone }}"
+        cores: "{{ yc_cores }}"
+        memory: "{{ yc_memory }}"
+        image_family: "{{ yc_image_family }}"
+        image_folder_id: "{{ yc_image_folder_id }}"
+        subnet_name: "{{ yc_subnet }}"
+
+    - name: Create LightHouse VM
+      my_own_namespace.yandex_cloud_elk.yc_compute_instance:
+        name: "lighthouse-01"
+        folder_id: "{{ yc_folder_id }}"
+        zone: "{{ yc_zone }}"
+        cores: "{{ yc_cores }}"
+        memory: "{{ yc_memory }}"
+        image_family: "{{ yc_image_family }}"
+        image_folder_id: "{{ yc_image_folder_id }}"
+        subnet_name: "{{ yc_subnet }}"
+
+    - name: Generate inventory from cloud
+      my_own_namespace.yandex_cloud_elk.yc_compute_instance:
+        state: list
+        folder_id: "{{ yc_folder_id }}"
+      register: cloud_inventory
+
+    - name: Save dynamic inventory to file
+      copy:
+        content: "{{ {'all': {'hosts': cloud_inventory.inventory}} | to_nice_yaml }}"
+        dest: ./inventory.yml
+
+- name: Configure Observability stack
+  hosts: all
+  become: true
+  tags: [configure]
+  roles:
+    - role: clickhouse
+      when: "'clickhouse' in inventory_hostname"
+    - role: vector_role
+      when: "'vector' in inventory_hostname"
+    - role: lighthouse_role
+      when: "'lighthouse' in inventory_hostname"

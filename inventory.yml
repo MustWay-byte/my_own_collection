@@ -1,0 +1,14 @@
+all:
+  hosts:
+    clickhouse-01:
+      ansible_host: 89.169.145.19
+      ansible_user: ubuntu
+      ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+    vector-01:
+      ansible_host: 89.169.143.163
+      ansible_user: ubuntu
+      ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+    lighthouse-01:
+      ansible_host: 93.77.191.123
+      ansible_user: ubuntu
+      ansible_ssh_common_args: '-o StrictHostKeyChecking=no'

@@ -1,0 +1,30 @@
+all:
+    hosts:
+        clickhouse-01:
+            ansible_host: 111.88.251.143
+            ansible_user: ubuntu
+            yc_cores: '2'
+            yc_memory: '2147483648'
+            yc_platform: standard-v2
+            yc_zone: ru-central1-a
+        lighthouse-01:
+            ansible_host: 93.77.176.119
+            ansible_user: ubuntu
+            yc_cores: '2'
+            yc_memory: '2147483648'
+            yc_platform: standard-v2
+            yc_zone: ru-central1-a
+        test-vm:
+            ansible_host: 10.128.0.24
+            ansible_user: ubuntu
+            yc_cores: '2'
+            yc_memory: '2147483648'
+            yc_platform: standard-v2
+            yc_zone: ru-central1-a
+        vector-01:
+            ansible_host: 84.252.130.85
+            ansible_user: ubuntu
+            yc_cores: '2'
+            yc_memory: '2147483648'
+            yc_platform: standard-v2
+            yc_zone: ru-central1-a

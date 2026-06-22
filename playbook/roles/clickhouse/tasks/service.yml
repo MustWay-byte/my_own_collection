@@ -1,0 +1,19 @@
+---
+
+- name: >-
+    Ensure {{ clickhouse_service }}
+    is enabled: {{ clickhouse_service_enable }}
+    and state: {{ clickhouse_service_ensure }}
+  ignore_errors: yes
+  service:
+    name: "{{ clickhouse_service }}"
+    enabled: "{{ clickhouse_service_enable }}"
+    state: "{{ clickhouse_service_ensure }}"
+  become: true
+
+- name: Wait for Clickhouse Server to Become Ready
+  ignore_errors: yes
+  wait_for:
+    port: 9000
+    host: 127.0.0.1
+    delay: 5
